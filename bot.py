@@ -1,7 +1,7 @@
 import discord
 from discord import app_commands
 from discord.ext import commands
-from ..Cow import config
+from config import token_discord
 import random
 async def send_message(message, user_message, is_private):
     try:
@@ -12,7 +12,7 @@ async def send_message(message, user_message, is_private):
     pass
 
 def run_discord_bot():
-    TOKEN = config.token_discord
+    TOKEN = token_discord
 
     intents = discord.Intents.default()
     intents.typing = False
