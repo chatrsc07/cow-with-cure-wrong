@@ -4,21 +4,20 @@ from discord.ext import commands
 from ..Cow import config
 import random
 async def send_message(message, user_message, is_private):
-    # try:
-    #     response = "Hello"
-    #     await message.author.send(response) if is_private else await message.channel.send(response)
-    # except Exception as e:
-    #     print(e)
+    try:
+        response = "Hello"
+        await message.author.send(response) if is_private else await message.channel.send(response)
+    except Exception as e:
+        print(e)
     pass
 
 def run_discord_bot():
     TOKEN = config.token_discord
 
-    # Define the intents and enable them
     intents = discord.Intents.default()
-    intents.typing = False  # Disable typing events if desired
-    intents.presences = False  # Disable presence events if desired
-    intents.messages = True  # Enable message events
+    intents.typing = False
+    intents.presences = False
+    intents.messages = True
     intents.message_content = True
 
     intents.members = True
@@ -45,11 +44,11 @@ def run_discord_bot():
 
         print(f"Received message in {channel} from {username}: '{user_message}'")
 
-        if user_message and user_message[0] == '?':
-            user_message = user_message[1:]
-            await send_message(message, user_message, is_private=True)
-        else:
-            await send_message(message, user_message, is_private=False)
+        # if user_message and user_message[0] == '?':
+        #     user_message = user_message[1:]
+        #     await send_message(message, user_message, is_private=True)
+        # else:
+        #     await send_message(message, user_message, is_private=False)
 
 
     # @bot.tree.command(name="test")
@@ -69,13 +68,13 @@ def run_discord_bot():
         number = random.randint(1, 20)
         if number <= 15:
             await interaction.response.send_message(f"you lost")
+            interaction.user.timeout(seconds=10)
             print(f" {interaction.user} gambled and lost")
         else:
             print(f" {interaction.user} gambled")
             await interaction.response.send_message(f"{number}")
 
 
-    # Run the bot
     bot.run(TOKEN)
 
 
