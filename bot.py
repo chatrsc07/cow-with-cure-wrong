@@ -2,6 +2,7 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 from config import token_discord
+from datetime import timedelta
 import random
 async def send_message(message, user_message, is_private):
     try:
@@ -68,7 +69,8 @@ def run_discord_bot():
         number = random.randint(1, 20)
         if number <= 15:
             await interaction.response.send_message(f"you lost")
-            interaction.user.timeout(seconds=10)
+            duration = timedelta(days=0, seconds=5)
+            await interaction.user.timeout(duration)
             print(f" {interaction.user} gambled and lost")
         else:
             print(f" {interaction.user} gambled")
