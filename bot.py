@@ -21,7 +21,6 @@ def run_discord_bot():
     intents.messages = True  # Enable message events
     intents.message_content = True
 
-    # Explicitly enable privileged intents (for members and message content)
     intents.members = True
     intents.message_content = True
 
