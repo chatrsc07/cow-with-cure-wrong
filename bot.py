@@ -68,10 +68,11 @@ def run_discord_bot():
     async def Cramble(interaction: discord.Interaction):
         number = random.randint(1, 20)
         if number <= 15:
-            await interaction.response.send_message(f"you lost")
+            await interaction.response.send_message(f"Bithcy Mitchy")
             duration = timedelta(days=0, seconds=0, minutes=20)
             await interaction.user.timeout(duration)
             print(f" {interaction.user} gambled and lost")
+            update_number_in_file(interaction.user.id)
         else:
             print(f" {interaction.user} gambled")
             await interaction.response.send_message(f"{number}")
@@ -80,6 +81,33 @@ def run_discord_bot():
     bot.run(TOKEN)
 
 
+
+import os
+
+def update_number_in_file(target_number):
+    lines = []
+    found = False
+
+    # Check if the file exists
+    if not os.path.exists('data.txt'):
+        with open('data.txt', 'w') as file:
+            file.write('')
+
+    with open('data.txt', 'r') as file:
+        for line in file:
+            parts = line.strip().split(', ')
+            if len(parts) == 2:
+                number, value = parts
+                if number == target_number:
+                    value = str(int(value) + 1)
+                    found = True
+                lines.append(f'{number}, {value}\n')
+
+    if not found:
+        lines.append(f'{target_number}, 1\n')
+
+    with open('data.txt', 'w') as file:
+        file.writelines(lines)
 
 
 
