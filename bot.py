@@ -69,7 +69,7 @@ def run_discord_bot():
         number = random.randint(1, 20)
         if number <= 15:
             await interaction.response.send_message(f"you lost")
-            duration = timedelta(days=0, seconds=5)
+            duration = timedelta(days=0, seconds=0, minutes=20)
             await interaction.user.timeout(duration)
             print(f" {interaction.user} gambled and lost")
         else:
