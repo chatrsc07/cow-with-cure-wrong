@@ -4,6 +4,7 @@ from discord.ext import commands
 from config import token_discord
 from datetime import timedelta
 import random
+import os
 async def send_message(message, user_message, is_private):
     try:
         response = "Hello"
@@ -82,7 +83,6 @@ def run_discord_bot():
 
 
 
-import os
 
 def update_number_in_file(target_number):
     lines = []
